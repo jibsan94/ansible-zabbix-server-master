@@ -49,7 +49,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: webservers
       roles:
-         - { role: jibsan94.ansible-zabbix-server-master }
+         - jibsan94.ansible-zabbix-server-master
 
 # License
 
