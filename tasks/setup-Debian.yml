@@ -1,0 +1,85 @@
+---
+- name: Update apt cache
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Ensure PHP is installed on Debian.
+  apt: "name={{ php_packages }} state={{ php_packages_state }}"
+
+- name: Setting up timezone to America/New_York
+  ini_file: dest="{{ php_config_file }}" section=Date option=date.timezone value=America/New_York backup=yes
+  tags: configuration
+
+- name: Setting up Zabbix Repositories
+  copy: src=ubuntu.deb dest=/root/ubuntu.deb
+
+- name: Installing Zabbix configuration
+  apt:
+    deb: /root/ubuntu.deb
+
+- name: Copy Zabbix list repo to host
+  template:
+    src: zabbix.list.j2
+    dest: "{{ zabbix_path_list }}/zabbix.list"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Deleting extra files
+  file:
+    path: /root/ubuntu.deb
+    state: absent
+
+- name: Update apt cache for get Zabbix Packages
+  apt: update_cache=yes
+
+- name: Installing Zabbix Packages
+  apt:  "name={{ zabbix_packages }} state={{ zabbix_packages_state }}"
+
+- name: Create a new database for Zabbix
+  mysql_db:
+    name: "{{ zabbix_mysql_db_name }}"
+    state: present
+
+- name: Set mysql user privileges
+  mysql_user:
+    name: "{{ zabbix_mysql_user_name }}"
+    password: "{{ zabbix_mysql_user_password }}"
+    priv: "zabbix.*:ALL"
+    state: present
+
+- name: Grant Privilegies
+  shell: >
+    mysql -u root -NBe
+    'FLUSH PRIVILEGES;'
+  args:
+    executable: /bin/bash
+    warn: false
+
+- name: Import mysql tables
+  shell: >
+    zcat /usr/share/doc/zabbix-server-mysql/create.sql.gz \
+    | mysql zabbix \
+    && touch /root/.zabbix.schema.imported
+    creates=/root/.zabbix.schema.imported
+
+- name: Copy Zabbix configuration file to server
+  template:
+    src: zabbix_server.conf.j2
+    dest: "{{ zabbix_conf_path }}/zabbix.list"
+    owner: root
+    group: root
+    mode: 0777
+  notify:
+    - Restart zabbix-server
+    - Restart apache2
+
+- name: Writing User and Password for Zabbix
+  template:
+    src: zabbix.conf.php.j2
+    dest: "{{ zabbix_web_settings_path }}/zabbix.conf.php"
+    owner: root
+    group: root
+    mode: 0777
+  notify:
+    - Restart zabbix-server
+    - Restart apache2

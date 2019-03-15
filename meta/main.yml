@@ -1,0 +1,25 @@
+galaxy_info:
+  author: Jibsan Joel Rosa Toirac
+  description: Computer Engineer 
+
+  license: BSD
+
+  min_ansible_version: 1.2
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+
+  galaxy_tags: 
+    - zabbix
+    - server
+    - monitoring
+    - network
+    - zabbix-server
+
+dependencies: 
+  - ansible-mysqldb

@@ -1,0 +1,8 @@
+---
+- name: Restart zabbix-server
+  service: "name={{ zabbix_server_daemon }} state={{ zabbix_server_state }} enabled=yes"
+  tags: zabbix-server
+
+- name: Restart apache2
+  service: "name={{ apache_daemon }} state={{ apache_state }} enabled=yes"
+  tags: apache2
