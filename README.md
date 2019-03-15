@@ -41,7 +41,7 @@ Available variables are listed below for zabbix_server.conf file, along with the
 
 # Dependencies
 
-    
+ - jibsan94.ansible_mysqldb
 
 # Example Playbook
 
