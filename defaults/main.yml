@@ -1,0 +1,47 @@
+---
+#PHP data
+php_version: 7.2
+php_packages_state: latest
+
+#Route of the zabbix.list to be copied. Change the IP address for the address of your local Zabbix Repository
+zabbix_path_list: /etc/apt/sources.list.d
+zabbix_ip_repo: 192.168.14.100:8082
+
+#Zabbix Packages to be installed
+__zabbix_packages:
+  - zabbix-server-mysql
+  - zabbix-frontend-php
+  - zabbix-agent
+
+#Options "latest" to install latest version packages, recommended to leave it on "present"
+zabbix_packages_state:  present
+
+#User and Password for Zabbix MySQL user
+zabbix_mysql_user_name: zabbix
+zabbix_mysql_user_password: password
+
+#Name for Zabbix mysql database
+zabbix_mysql_db_name: zabbix
+
+#Zabbix Server configuration Path
+zabbix_conf_path: /etc/zabbix
+
+#Values for Server Configuration
+zabbix_server_db_host: localhost
+zabbix_server_db_name: zabbix
+zabbix_server_db_user: zabbix
+zabbix_server_db_password: password
+
+#Daemons for Apache & Zabbix
+apache_daemon:  apache2
+zabbix_server_daemon: zabbix-server
+
+#State for Apache & Zabbix
+apache_state: restarted
+zabbix_server_state:  restarted
+
+#Zabbix Web Settings
+zabbix_web_settings_path: /usr/share/zabbix/conf
+
+#Name of the Zabbix Server
+zabbix_server_name: Zabbix-Server
