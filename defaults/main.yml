@@ -5,7 +5,7 @@ php_packages_state: latest
 
 #Route of the zabbix.list to be copied. Change the IP address for the address of your local Zabbix Repository
 zabbix_path_list: /etc/apt/sources.list.d
-zabbix_ip_repo: 192.168.14.100:8082
+zabbix_ip_repo: repo.zabbix.com
 
 #Zabbix Packages to be installed
 __zabbix_packages:
