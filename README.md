@@ -41,7 +41,7 @@ Available variables are listed below for zabbix_server.conf file, along with the
 
 # Dependencies
 
-- jibsan94.ansible-mysqldb
+- jibsan94.ansible_mysqldb
 
 # Example Playbook
 
@@ -49,7 +49,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: webservers
       roles:
-         - jibsan94.ansible-zabbix-server-master
+         - jibsan94.ansible_zabbix_server_master
 
 # License
 
