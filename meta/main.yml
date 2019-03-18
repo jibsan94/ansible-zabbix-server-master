@@ -22,4 +22,4 @@ galaxy_info:
     - zabbix-server
 
 dependencies: 
-  - jibsan94.ansible-mysqldb
+  - jibsan94.ansible_mysqldb
