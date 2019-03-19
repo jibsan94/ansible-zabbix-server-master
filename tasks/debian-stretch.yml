@@ -1,0 +1,13 @@
+---
+- name: Setting up Zabbix Repositories
+  copy: src=stretch.deb dest=/root/stretch.deb
+
+- name: Installing Zabbix configuration
+  apt:
+    deb: /root/stretch.deb
+
+- name: Deleting extra files
+  file:
+    path: /root/stretch.deb
+    state: absent
+

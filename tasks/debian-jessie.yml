@@ -1,0 +1,12 @@
+---
+- name: Setting up Zabbix Repositories
+  copy: src=jessie.deb dest=/root/jessie.deb
+
+- name: Installing Zabbix configuration
+  apt:
+    deb: /root/jessie.deb
+
+- name: Deleting extra files
+  file:
+    path: /root/jessie.deb
+    state: absent

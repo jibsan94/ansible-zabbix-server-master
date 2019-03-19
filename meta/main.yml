@@ -1,6 +1,6 @@
 galaxy_info:
   author: Jibsan Joel Rosa Toirac
-  description: Install Zabbix on Ubuntu 
+  description: Computer Engineer 
 
   license: BSD
 
@@ -12,7 +12,9 @@ galaxy_info:
     - all
   - name: Debian
     versions:
-    - all
+    - 9
+    - jessie
+    - stretch
 
   galaxy_tags: 
     - zabbix

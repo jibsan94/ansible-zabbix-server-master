@@ -1,0 +1,13 @@
+---
+- name: Setting up Zabbix Repositories
+  copy: src=ubuntu.deb dest=/root/ubuntu.deb
+
+- name: Installing Zabbix configuration
+  apt:
+    deb: /root/ubuntu.deb
+
+- name: Deleting extra files
+  file:
+    path: /root/ubuntu.deb
+    state: absent
+
